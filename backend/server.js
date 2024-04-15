@@ -25,7 +25,7 @@ const connectToMongoDB = async () => {
     }
 };
 
-// Start the server and connect to MongoDB
+// verify that the backend is connected
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
     console.log(process.env.MONGO_DB_URI); // Log the MongoDB URI
