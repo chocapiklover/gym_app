@@ -1,6 +1,6 @@
 import '../App.css';
 import Week from '../components/Week';
-import Workout from '../components/Workout';
+import Exercise from '../components/Exercise';
 function MainPage() 
 {
   return (
@@ -9,7 +9,7 @@ function MainPage()
       <Week />
       <div id='createWorkout' className='border-2 border-black rounded-lg text-left'>
         <button className='p-2 text-lg'>+ New Workout</button>
-        <Workout />
+        <Exercise />
       </div>
     </>
   );

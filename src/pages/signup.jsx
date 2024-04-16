@@ -20,5 +20,10 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await signup(inputs)// when the user submits form, calls useSignup hook to handle signup
-    }
+    } 
+    return (
+        <h1>Sign Up</h1>
+    );
 }
+
+export default SignUp;

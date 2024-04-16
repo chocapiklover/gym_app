@@ -2,7 +2,7 @@ import Day from './Day';
 function Week() 
 {
   const daysOfWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-  const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'short' });//using Date objext to get current date in short
+  const currentDay = new Date().toLocaleDateString('en-UK', { weekday: 'short' });//using Date object to get current date in short
 
   return (
     <div className="flex justify-center space-x-2 mb-8">

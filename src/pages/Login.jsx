@@ -12,4 +12,9 @@ const Login = () => {
         e.preventDefault();
         await login(username, password)
     }
+    return (
+        <h1>Login</h1>
+    );
  }
+
+ export default Login;

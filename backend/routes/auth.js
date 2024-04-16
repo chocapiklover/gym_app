@@ -16,7 +16,7 @@ async function register(req, res) {
         if (password !== confirmPassword) {
             return res.status(400).json({ error: 'Passwords do not match' });
         }
-        
+        //if username exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).json({ error: "Username already exists." });
@@ -30,6 +30,7 @@ async function register(req, res) {
             username,
             password: hashedPassword,
             email,
+            weight,
             gender,
             height,
             age,
