@@ -1,29 +1,31 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import useSignup from '../hooks/useSignup.js'
 
-//STILL IN DEVELOPMENT
 const SignUp = () => {
     const [inputs, setInputs] = useState({
         username: '',
-        email:'',
+        email: '',
         password: '',
         confirmPassword: '',
-        height:'',
+        height: '',
         weight: '',
         age: '',
         gender: '',
-    })
+    });
 
-    const { loading, signup } = useSignup()
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setInputs(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         await signup(inputs)// when the user submits form, calls useSignup hook to handle signup
     } 
-
-    //TODO: Form for signup
     return (
         <h1>Sign Up</h1>
     );
