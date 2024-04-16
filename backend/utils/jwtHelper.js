@@ -1,21 +1,28 @@
 import jwt from 'jsonwebtoken';
 
 //Generates a JWT for a given user
-const generateToken = (user) => {
+export const generateToken = (userId, res) => {
 
-    // Sign a new token with user's ID and email
-    return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET_KEY, {
+    //assiging the user with a token
+    const token = jwt.sign({userId}, process.env.JWT_SECRET_KEY, {
         expiresIn: '3h'
+    })
+    
+    res.cookie("jwt", token, {
+        maxAge: 3 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "strict",
+        secure: true 
     });
 };
 
 //Verifies the validity of a given JWT.
-const verifyToken = (token) => {
-
-    //Verify the token using the same secret key used for signing
-    return jwt.verify(token, process.env.JWT_SECRET_KEY);
+export const verifyToken = (token) => {
+    try {
+        return jwt.verify(token, process.env.JWT_SECRET_KEY);
+    } catch (error) {
+        // handle error appropriately
+        console.error("Token verification failed:", error);
+        return null;
+    }
 };
-
-// Export the generateToken and verifyToken functions to be used in other parts of the application
-
-module.exports = { generateToken, verifyToken };

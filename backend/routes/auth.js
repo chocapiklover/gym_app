@@ -35,12 +35,25 @@ async function register(req, res) {
             height,
             age,
         });
+
+        if (user) {
+            //Generate JWT here
+            generateToken(user._id, res);
+
+            await user.save();
+
+            res.status(201).json({
+                _id: user._id,
+                username: user.username,
+                weight: user.weight,
+                height: user.height,
+                age: user.age,
+            })
+        } 
+        else {
+            res.status(400).json({error: 'Invalid user data'})
+        }
   
-        const savedUser = await user.save();
-        res.json({
-            message: "User registered successfully",
-            userId: savedUser._id,
-        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });

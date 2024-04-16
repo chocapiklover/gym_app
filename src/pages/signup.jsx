@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import useSignup from '../hooks/useSignup.js'
 
 //STILL IN DEVELOPMENT
 const SignUp = () => {
@@ -21,6 +22,8 @@ const SignUp = () => {
         e.preventDefault();
         await signup(inputs)// when the user submits form, calls useSignup hook to handle signup
     } 
+
+    //TODO: Form for signup
     return (
         <h1>Sign Up</h1>
     );
