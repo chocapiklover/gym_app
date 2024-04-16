@@ -1,14 +1,25 @@
-//!!!to run server run node server.js from the backend directory
+//!to run server run node server.js from the backend directory
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import express from 'express';
+import cors from 'cors';
 
+//file imports 
+import authRoutes from './routes/auth.js'
 // Import and configure dotenv at the top before accessing environment variables
 dotenv.config({ path: '../../.env' });
 
 // Define port number
 const app = express();
 const port = process.env.PORT || 5000;
+
+//Routes
+app.use("/api/auth", authRoutes); 
+
+//Middleware
+app.use(cors()); // Use CORS middleware to allow requests from the frontend
+app.use(express.json());
+
 
 // Define a route for HTTP GET requests to the root URL '/'
 app.get('/', (req, res) => {

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 //Generates a JWT for a given user
 const generateToken = (user) => {
 
-      // Sign a new token with user's ID and email
+    // Sign a new token with user's ID and email
     return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET_KEY, {
         expiresIn: '3h'
     });
