@@ -11,6 +11,7 @@ function App()
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path='/login' element={ <Login /> } />
         </Routes>
       </Router>
     </>
