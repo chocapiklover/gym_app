@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import useSignup from '../hooks/useSignup'
 
 const SignUp = () => {
     const [inputs, setInputs] = useState({
@@ -22,7 +23,9 @@ const SignUp = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const { loading, signup } = useSignup()
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         await signup(inputs)// when the user submits form, calls useSignup hook to handle signup
     } 
