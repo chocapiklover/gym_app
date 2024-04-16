@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
+//STILL IN DEVELOPMENT
 const SignUp = () => {
     const [inputs, setInputs] = useState({
         username: '',
