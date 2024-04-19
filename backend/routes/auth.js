@@ -100,7 +100,7 @@ const router = express.Router();
 
 // Authentication endpoint
 router.post('/register', register);
-router.post('/login', login);
-router.post('/logout', logout);
+router.post('/loginuser', login);
+router.post('/logoutuser', logout);
 
 export default router;

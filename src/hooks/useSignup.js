@@ -3,6 +3,7 @@ import { useAuthContext } from "../context/AuthContext.jsx"
 import toast from "react-hot-toast"
 
 const useSignup = () => {
+
     
     const [loading, setLoading] = useState(false)
     const { setAuthUser } = useAuthContext()
@@ -15,9 +16,12 @@ const useSignup = () => {
 
         setLoading(true);
         try {
-            
+
+
+
             //sends to the backend where registration is happening
-            const res = await fetch(`/api/auth/register`, {
+            const res = await fetch(`http://localhost:5000/api/auth/register`, {
+
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({username,email,password,confirmPassword,height,weight,age,gender})
@@ -47,7 +51,8 @@ const useSignup = () => {
                 console.error("Did not receive JSON");
             }
         } catch (error) {
-            toast.error(error.message);
+            // toast.error(error.message);
+            console.error(error);
         } finally {
             setLoading(false);
         }

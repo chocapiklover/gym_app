@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useSignup from '../hooks/useSignup.js'
 
@@ -22,7 +22,7 @@ const SignUp = () => {
         }));
     };
 
-    const { loading, signup } = useSignup()
+    const { signup } = useSignup() //TODO: add loading state here
 
     const handleSubmit = async (e) => {
         e.preventDefault();
