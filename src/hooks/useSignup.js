@@ -10,6 +10,7 @@ const useSignup = () => {
     const signup = async ({ username,email,password,confirmPassword,height,weight,age,gender}) => {
 
         const success = handleInputValidation({username,email,password,confirmPassword,height,weight,age,gender})
+        console.log('success')
         if (!success) return;
 
         setLoading(true);
@@ -17,27 +18,36 @@ const useSignup = () => {
             
             //sends to the backend where registration is happening
             const res = await fetch(`/api/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({username,email,password,confirmPassword,height,weight,age,gender})
             })
 
-            //response from the backend after registration
-            const data = await res.json();
-            if (data.error) {
-                toast.error(error.message)
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
             }
+            
+            let data = {};
+            if (res.headers.get("content-type")?.includes("application/json")) {
+                data = await res.json(); // Parse JSON only once here
 
-            console.log(data)
+                if (data.error) {
+                    toast.error(data.error);
+                } else {
+                    console.log(data);
 
-            //save to local storage
-            localStorage.setItem('app-user', JSON.stringify(data))
+                    // Save to local storage
+                    localStorage.setItem('app-user', JSON.stringify(data));
+                    console.log('app-user');
 
-            //set the user to auth context
-            setAuthUser(data);
-
+                    // Set the user to auth context
+                    setAuthUser(data);
+                }
+            } else {
+                console.error("Did not receive JSON");
+            }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message);
         } finally {
             setLoading(false);
         }
@@ -51,7 +61,7 @@ export default useSignup
 // input validation //
 
 //check if all fields have values
-function handleInputErrors({username,email,password,confirmPassword,height,weight,age,gender}) {
+function handleInputValidation({username,email,password,confirmPassword,height,weight,age,gender}) {
     if (!username || !email || !password || !confirmPassword || !gender || !height || !weight || !age ){
         toast.error('Please fill in all the fields')
         return false;

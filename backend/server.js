@@ -13,12 +13,12 @@ dotenv.config({ path: '../../.env' });
 const app = express();
 const port = process.env.PORT || 5000;
 
-//Routes
-app.use("/api/auth", authRoutes); 
-
 //Middleware
 app.use(cors()); // Use CORS middleware to allow requests from the frontend
 app.use(express.json());
+
+//Routes
+app.use('/api/auth', authRoutes);
 
 
 // Define a route for HTTP GET requests to the root URL '/'
@@ -38,7 +38,7 @@ const connectToMongoDB = async () => {
 
 // verify that the backend is connected
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on here http://localhost:${port}`);
     console.log(process.env.MONGO_DB_URI); // Log the MongoDB URI
     connectToMongoDB();
 });

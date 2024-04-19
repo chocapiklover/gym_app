@@ -2,8 +2,9 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../DB/models/user.models.js'
 import bcrypt from 'bcrypt';
+import { generateToken } from '../utils/jwtHelper.js'
 
-const router = express.Router();
+
 
 //STILL IN DEVELOPMENT
 
@@ -94,6 +95,8 @@ async function logout (req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
+const router = express.Router();
 
 // Authentication endpoint
 router.post('/register', register);
