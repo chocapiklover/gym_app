@@ -4,8 +4,6 @@ import User from '../DB/models/user.models.js'
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwtHelper.js'
 
-
-
 //STILL IN DEVELOPMENT
 
 // Function to handle user registration
@@ -78,7 +76,7 @@ async function login(req, res) {
         res.send({ token });
         
     } catch (error) {
-        console.log("error in signup controller ",error.message);
+        console.log("error in login controller ",error.message);
         res.status(500).json({ error: "Internal server error" });
     }
 }
