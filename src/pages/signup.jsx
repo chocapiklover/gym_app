@@ -6,12 +6,12 @@ const SignUp = () => {
     const [inputs, setInputs] = useState({
         username: '',
         email: '',
-        password: '',
-        confirmPassword: '',
         height: '',
         weight: '',
         age: '',
         gender: '',
+        password: '',
+        confirmPassword: '',
     });
 
     const handleChange = (e) => {
