@@ -5,6 +5,13 @@ import Exercise from '../components/Exercise';
 
 function MainPage() {
   const [showNewWorkout, setShowNewWorkout] = useState(false);
+  const [workoutName, setWorkoutName] = useState('')
+
+  const handleWorkoutSubmit = (name) =>
+  {
+    setWorkoutName(name);
+    setShowNewWorkout(false);
+  }
 
   return (
     <>
@@ -18,17 +25,21 @@ function MainPage() {
                 &times; Close
               </button>
             </div>
-            <NewWorkout />
+            <NewWorkout onWorkoutSubmit={handleWorkoutSubmit} />
           </div>
         </div>
       )}
       <h1 className='text-5xl mb-8'>Workout</h1>
       <Week />
       <div id='createWorkout' className='border-2 border-black rounded-lg text-left'>
-        <button 
-          className="p-2 text-lg"
-          onClick={() => setShowNewWorkout(true)}
-        >+ New Workout</button>
+      {workoutName ? (
+          <h2 className="text-lg p-2">{workoutName}</h2>
+        ) : (
+          <button 
+            className="p-2 text-lg"
+            onClick={() => setShowNewWorkout(true)}
+          >+ New Workout</button>
+        )}
         <Exercise />
       </div>
     </>

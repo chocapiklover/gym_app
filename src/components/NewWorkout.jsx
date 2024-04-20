@@ -1,4 +1,28 @@
-function NewWorkout() {
+import React, { useState } from "react";
+function NewWorkout({ onWorkoutSubmit }) {
+    const [workoutName, setWorkoutName] = useState('');
+    
+    const handleSubmit = async(event) =>
+    {
+        event.preventDefault();
+        const response = await fetch('', //here we need the backend
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: workoutName})
+        });
+        if (response.ok)
+        {
+            onWorkoutSubmit(workoutName);
+            console.log('Workout Name saved to backend!')
+        }
+        else 
+        {
+            console.log('Did not work :(')
+        }
+    }
     return (
         <div className="flex justify-center items-center">
             <form className="bg-white p-6 rounded shadow-lg">
@@ -10,7 +34,8 @@ function NewWorkout() {
                         type="text"
                         id="workoutName"
                         name="workoutName"
-                        placeholder="Enter workout name"
+                        value={workoutName}
+                        onChange={e => setWorkoutName(e.target.value)}                        placeholder="Enter workout name"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
