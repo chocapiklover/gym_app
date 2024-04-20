@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import NewWorkout from '../components/NewWorkout';
 import Week from '../components/Week';
 import Exercise from '../components/Exercise';
