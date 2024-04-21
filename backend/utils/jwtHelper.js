@@ -1,19 +1,15 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '../../.env' });
+
 
 //Generates a JWT for a given user
-export const generateToken = (userId, res) => {
-
-    //assiging the user with a token
-    const token = jwt.sign({userId}, process.env.JWT_SECRET_KEY, {
+export const generateToken = (userId) => {
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET_KEY, {
         expiresIn: '3h'
-    })
-    
-    res.cookie("jwt", token, {
-        maxAge: 3 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: "strict",
-        secure: true 
     });
+    return token;
 };
 
 //Verifies the validity of a given JWT.

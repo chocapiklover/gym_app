@@ -37,6 +37,8 @@ const useLogin = () => {
 
             //set user to auth context
             setAuthUser(data);
+
+            toast.success('Successfully logged in');
         } catch (error) {
             toast.error(error.message);
         } finally {

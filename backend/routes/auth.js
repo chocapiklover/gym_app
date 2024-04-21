@@ -3,8 +3,12 @@ import jwt from 'jsonwebtoken';
 import User from '../DB/models/user.models.js'
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwtHelper.js'
+import dotenv from 'dotenv';
 
 //STILL IN DEVELOPMENT
+
+dotenv.config({ path: '../../.env' });
+
 
 // Function to handle user registration
 async function register(req, res) {
@@ -29,30 +33,26 @@ async function register(req, res) {
             username,
             password: hashedPassword,
             email,
-            weight,
             gender,
+            weight,
             height,
             age,
+            tokens: [] // Initialize the tokens array
         });
 
-        if (user) {
-            //Generate JWT here
-            generateToken(user._id, res);
+        const token = generateToken(user._id); // Generate token
+        user.tokens.push({ token }); // Add token to the tokens array
 
-            await user.save();
+        await user.save(); // Save the user with the token
 
-            res.status(201).json({
-                _id: user._id,
-                username: user.username,
-                weight: user.weight,
-                height: user.height,
-                age: user.age,
-            })
-        } 
-        else {
-            res.status(400).json({error: 'Invalid user data'})
-        }
-  
+        res.status(201).json({
+            _id: user._id,
+            username: user.username,
+            weight: user.weight,
+            height: user.height,
+            age: user.age,
+            token // Optionally send the token in response if needed
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -64,14 +64,19 @@ async function login(req, res) {
     
     try {
         const { username, password } = req.body;
+        console.log(username, password)
         const user = await User.findOne({ username });
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || '');
+        console.log('password', password, 'backendpassword',  user?.password )
+        console.log(user, isPasswordCorrect)
 
         if (!user || !isPasswordCorrect) {
             return res.status(400).json({error: "invalid credentials" });
         }
+       
+        console.log('JWT_SECRET:', process.env.JWT_SECRET_KEY);
 
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY);
 
         res.send({ token });
         
