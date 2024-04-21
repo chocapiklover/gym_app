@@ -6,6 +6,7 @@ import Exercise from '../components/Exercise';
 function MainPage() {
   const [showNewWorkout, setShowNewWorkout] = useState(false);
   const [workoutName, setWorkoutName] = useState('')
+  const [currentDay, SetCurrentDay] = useState('')
 
   const handleWorkoutSubmit = (name) =>
   {
@@ -30,7 +31,7 @@ function MainPage() {
         </div>
       )}
       <h1 className='text-5xl mb-8'>Workout</h1>
-      <Week />
+      <Week onSetCurrentDay={SetCurrentDay} />
       <div id='createWorkout' className='border-2 border-black rounded-lg text-left'>
       {workoutName ? (
           <h2 className="text-lg p-2">{workoutName}</h2>

@@ -6,6 +6,7 @@ import cors from 'cors';
 
 //file imports 
 import authRoutes from './routes/auth.js'
+import newWorkoutRoutes from './routes/new_workout.js';
 // Import and configure dotenv at the top before accessing environment variables
 dotenv.config({ path: '../../.env' });
 
@@ -19,7 +20,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/auth', authRoutes);
-
+app.use(newWorkoutRoutes);
 
 // Define a route for HTTP GET requests to the root URL '/'
 app.get('/', (req, res) => {
