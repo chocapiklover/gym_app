@@ -46,6 +46,7 @@ const useSignup = () => {
 
                     // Set the user to auth context
                     setAuthUser(data);
+                    toast.success('Successfully registered');
                 }
             } else {
                 console.error("Did not receive JSON");

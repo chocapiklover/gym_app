@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { toast } from'react-hot-toast';
 import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
+
 
 
 const useLogin = () => {
 
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();  // Initialize navigate hook
+
 
     const { setAuthUser } = useAuthContext();
 
@@ -23,6 +27,10 @@ const useLogin = () => {
                 body: JSON.stringify({ username, password })
             })
 
+            if (!res.ok) {
+                throw new Error('Failed to log in. Please check your credentials and try again.');
+            }
+
             //parse the JSON response from the server
             const data = await res.json();
 
@@ -39,6 +47,9 @@ const useLogin = () => {
             setAuthUser(data);
 
             toast.success('Successfully logged in');
+            
+            
+            navigate('/')
         } catch (error) {
             toast.error(error.message);
         } finally {
