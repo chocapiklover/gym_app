@@ -12,9 +12,14 @@ export const useAuthContext = () => {
 // Context provider component to manage authentication state.
 export const AuthContextProvider = ({ children }) => {
     
-    // Initialize authentication state with user data from local storage or set to null if none.
-    const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('app-user')) || null);
+    // Safely initialize authentication state with user data from local storage or set to null if none.
+    const getUserFromLocalStorage = () => {
+        const storedUser = localStorage.getItem('app-user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    };
 
+    // Set the authUser state to the user data from local storage or null if none.
+    const [authUser, setAuthUser] = useState(getUserFromLocalStorage);
     // Provide auth state and updater function to all child components.
     return (
         <AuthContext.Provider value={{authUser, setAuthUser}}>

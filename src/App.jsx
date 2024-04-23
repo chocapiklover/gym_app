@@ -6,6 +6,7 @@ import './App.css';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
+import UserProfile from './pages/profilePage';
 
 function App() 
 {
@@ -18,6 +19,7 @@ function App()
           <Route path="/" element={<MainPage />} />
           <Route path='/login' element={ <Login /> } />
           <Route path='/signup' element={ <SignUp /> } />
+          <Route path='/profile' element={ <UserProfile /> } />
         </Routes>
         <Toaster />
       </Router>

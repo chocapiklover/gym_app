@@ -78,7 +78,9 @@ async function login(req, res) {
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY);
 
-        res.send({ token });
+        //send token and user info to the client
+        res.send({ token, user: { username: user.username, id: user.id } });
+
         
     } catch (error) {
         console.log("error in login controller ",error.message);
