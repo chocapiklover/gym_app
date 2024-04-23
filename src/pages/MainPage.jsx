@@ -6,14 +6,18 @@ import Navbar from '../components/Navbar';
 
 function MainPage() {
   const [showNewWorkout, setShowNewWorkout] = useState(false);
-  const [workoutName, setWorkoutName] = useState('')
-  const [currentDay, SetCurrentDay] = useState('')
+  const [workoutName, setWorkoutName] = useState('');
+  const [currentDay, setCurrentDay] = useState('');
 
   const handleWorkoutSubmit = (name) =>
   {
     setWorkoutName(name);
     setShowNewWorkout(false);
   }
+
+  const handleSetCurrentDay = (day) => {
+    setCurrentDay(day);
+  };
 
   return (
     <>
@@ -27,12 +31,12 @@ function MainPage() {
                 &times; Close
               </button>
             </div>
-            <NewWorkout onWorkoutSubmit={handleWorkoutSubmit} />
+            <NewWorkout onWorkoutSubmit={handleWorkoutSubmit} currentDay={currentDay} />
           </div>
         </div>
       )}
       <h1 className='text-5xl mb-8'>Workout</h1>
-      <Week onSetCurrentDay={SetCurrentDay} />
+      <Week onSetCurrentDay={handleSetCurrentDay} />
       <div id='createWorkout' className='border-2 border-black rounded-lg text-left'>
       {workoutName ? (
           <h2 className="text-lg p-2">{workoutName}</h2>

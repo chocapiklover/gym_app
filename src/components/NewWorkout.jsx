@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import { useAuthContext } from '../context/AuthContext.jsx';
 function NewWorkout({ onWorkoutSubmit, currentDay }) {
     const [workoutName, setWorkoutName] = useState('');
+    const { authUser } = useAuthContext();
     
     const handleSubmit = async(event) =>
     {
         event.preventDefault();
-        const response = await fetch('https://localhost:5000/api/workouts', //here we need the backend
+        const response = await fetch('http://localhost:5000/api/workouts',
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: workoutName, weekday:currentDay})
+            body: JSON.stringify({ workoutName, weekday:currentDay, userId: authUser.user.id})
         });
+        console.log(workoutName, currentDay, authUser.user.userid);
         if (response.ok)
         {
             onWorkoutSubmit(workoutName);
