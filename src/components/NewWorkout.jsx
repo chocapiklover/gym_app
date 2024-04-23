@@ -1,17 +1,17 @@
-import { useState } from "react";
-function NewWorkout({ onWorkoutSubmit }) {
+import React, { useState } from "react";
+function NewWorkout({ onWorkoutSubmit, currentDay }) {
     const [workoutName, setWorkoutName] = useState('');
     
     const handleSubmit = async(event) =>
     {
         event.preventDefault();
-        const response = await fetch('', //here we need the backend
+        const response = await fetch('https://localhost:5000/api/workouts', //here we need the backend
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: workoutName})
+            body: JSON.stringify({ name: workoutName, weekday:currentDay})
         });
         if (response.ok)
         {
