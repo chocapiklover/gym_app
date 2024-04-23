@@ -3,7 +3,7 @@ const useLogout = () => {
     const logout = async () => {
       try {
         // Making a POST request to the backend logout endpoint using Fetch
-        const response = await fetch('http://localhost:5000/api/auth/logout', {
+        const response = await fetch('http://localhost:5000/api/auth/logoutuser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -27,5 +27,5 @@ const useLogout = () => {
     return logout;
   };
   
-  export default useLogout;
+export default useLogout;
   
