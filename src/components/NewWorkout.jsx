@@ -35,7 +35,8 @@ function NewWorkout({ onWorkoutSubmit, currentDay }) {
                         id="workoutName"
                         name="workoutName"
                         value={workoutName}
-                        onChange={e => setWorkoutName(e.target.value)}                        placeholder="Enter workout name"
+                        onChange={e => setWorkoutName(e.target.value)}                       
+                        placeholder="Enter workout name"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>

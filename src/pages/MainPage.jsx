@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NewWorkout from '../components/NewWorkout';
 import Week from '../components/Week';
 import Exercise from '../components/Exercise';
+import Navbar from '../components/Navbar';
 
 function MainPage() {
   const [showNewWorkout, setShowNewWorkout] = useState(false);
@@ -43,6 +44,7 @@ function MainPage() {
         )}
         <Exercise />
       </div>
+      <Navbar />
     </>
   );
 }
