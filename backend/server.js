@@ -8,7 +8,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth.js'
 import newWorkoutRoutes from './routes/new_workout.js';
 // Import and configure dotenv at the top before accessing environment variables
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
 
 // Define port number
 const app = express();

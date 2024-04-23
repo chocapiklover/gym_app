@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
+import { useAuthContext } from '../context/AuthContext.jsx';
+
 
 const Navbar = () => {
 
   const logout = useLogout();
+  const { authUser } = useAuthContext();
+  console.log(authUser);
 
 
   return (
@@ -15,14 +19,27 @@ const Navbar = () => {
       </div>
       <div>
         <ul className="flex space-x-4">
-          <li><Link to="/profile" className="hover:text-gray-300">usernamehere</Link></li>
-          <button onClick={logout}>Logout</button>
+          {authUser && authUser.user ? (
+            <>
+              <li>
+                <Link to="/profile" className="hover:text-gray-300">
+                  {authUser.user.username}
+                </Link>
+              </li>
+              <li>
+                <button className="hover:text-gray-300" onClick={logout}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login" className="hover:text-gray-300">Login</Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>
   </nav>
-  
-  );
+);
 }
 
 export default Navbar;
